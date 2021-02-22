@@ -1,0 +1,50 @@
+@import 'globals/_project-globals'
+@import 'components/_mixins'
+@import 'components/utilities.sass';
+
+*
+	box-sizing: border-box 
+html
+	font-size: 14px
+body
+	margin: var(--body-margin, 0) 
+	padding: var(--body-margin, 0)
+	font-family: var(--base-font)
+	font-size: 100% 
+	line-height: 1.45  
+	background-color: var(--shade-01)
+h1, h2, h3, h4, h5
+	font-family: var(--heading-font) 
+	line-height: 1.35
+h1
+	font-size: 2.0581rem
+h2
+	font-size: 1.618rem
+h3
+	font-size: 1.272rem
+button
+	font-family: var(--base-font)
+.svg-icon
+	max-width: 	2rem
+	max-height: 2rem
+
+@media screen and (min-width: 600px) 
+	html
+		font-size: 16px
+@media screen and (min-width: 1200px) 
+	html
+		font-size: 18px
+@media screen and (min-width: 1400px) 
+	html
+		font-size: 20px
+
+
+@import 'components/animations.sass';
+@import 'components/grid';
+@import 'components/hero'; 
+@import 'components/cards'; 
+
+
+
+		
+		

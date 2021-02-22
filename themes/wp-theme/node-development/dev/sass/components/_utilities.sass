@@ -1,0 +1,29 @@
+.bc-object-embed
+	@include objectEmbed
+.is-1x1 
+	@include is-1x1
+.is-3x2 
+	@include is-3x2
+.is-4x3 
+	@include is-4x3
+.is-5x4 
+	@include is-5x4
+.is-16x9 
+	@include is-16x9
+
+.bc-plain-list
+	@include plainList
+	
+.bc-icon-links
+	@include plainList
+	@include makeFlexbox($align: center)
+	.svg-icon
+		max-height: #{$line-height}rem
+		max-width: #{$line-height}rem
+	a 
+		@include makeFlexbox(row, center, center)
+		width: 2rem
+		height: 2rem
+		text-decoration: none
+		@include linkHover
+			text-decoration: none

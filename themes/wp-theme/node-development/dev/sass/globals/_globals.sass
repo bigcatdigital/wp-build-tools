@@ -1,0 +1,191 @@
+//////////////////////////
+//**	Global variables *//
+//////////////////////////
+
+//* Spacing *//
+$line-height: 1.5
+$vertical-unit: 	1rem * $line-height	
+$gutter: 					$vertical-unit
+$min-col-width: 				240px
+$min-col-width-narrow: 	180px
+$max-content-width: 1280px
+
+//** Responsive *//
+$x-small: 				340px		
+$small: 					540px		
+$tablet: 					768px		
+$tablet-large: 		1024px	
+$laptop: 					1240px		
+$laptop-large:	 	1366px	
+$desktop: 				1440px	
+$desktop-large: 	1600px	
+$big-screen: 			1920px
+
+//** Colour *//
+$black: 			#000000 			
+$text-black:	#303030 
+$red: 		#f00
+$orange:	#f60 		
+$yellow:	#ff0 		
+$green:		#0f0
+$blue:		#00f
+$purple:	#4B0082	
+$violet:	#9400D3 
+
+//** Shades *//
+$white:				 #fff
+$shade-01:		#f6f6f6		
+$shade-02:		#f0f0f0		
+$shade-03:		#e0e0e0		 
+$shade-04:		#e0e0e0		
+$shade-05:		#808080
+
+$shades: ('white': $white, 'shade-01': #{$shade-01}, 'shade-02': #{$shade-02}, 'shade-03': #{$shade-03}, 'shade-04': #{$shade-04}, 'shade-05': #{$shade-05})	
+$colours: ('white': #{$white}, 'black': #{$black}, 'red': #{$red}, 'orange': #{$orange}, 'yellow': #{$yellow}, 'green': #{$green}, 'blue': #{$blue}, 'puple': #{$purple}, 'violet': #{$violet}) 
+
+$brand-primary: 		$shade-02
+$brand-darker: 			#{darken($shade-02, 12%)}
+$brand-secondary: 	$shade-04
+
+$brand-primary-invert: 		$text-black
+$brand-darker-invert: 		$white
+$brand-secondary-invert: 	$text-black 
+
+//** Typography  */
+$sans-font: 			'Quattrocento Sans', sans-serif
+$serif-font: 			'Quattrocento', serif
+
+
+//* Pentatonic scale n = 5; r = 2 *//
+$text--2:	0.758rem		
+$text--1:	0.8706rem		
+$text-00: 			 1rem				
+$text-01: 	1.1487rem		
+$text-02: 	1.3195rem		
+$text-03: 	1.5157rem  	
+$text-04: 	1.7411rem		
+$text-10: 	2.0rem	
+$text-11: 	2.2974rem		 
+$text-12: 	2.6390rem	
+
+//* Animations *//
+$quicktrans: 					240ms
+$medtrans: 						480ms
+$easing: ease-in-out
+
+\:root 
+
+	//////////////////////////////// 
+	// ** CSS global variables ** //
+	////////////////////////////////
+	
+	//** Layout *// 
+	--body-margin:		0 
+	--body-padding:		0 			
+	--content-max-width: 1600px
+	--text-max-width: 	 none 	
+	--base-cols: 4	
+	--min-col-width: #{$min-col-width}	
+	--min-col-width-narrow: #{$min-col-width-narrow}	
+	--max-content-width: #{$max-content-width}	
+	
+	//* Spacing *//
+	--line-height: #{$line-height}
+	--vertical-unit: #{$vertical-unit}
+	--gutter: #{$gutter}
+	--heading-line-height: 1.3
+	
+	//* Responsive *//
+	--x-small: #{$x-small}	
+	--small: #{$small}	
+	--tablet: #{$tablet}	
+	--tablet-large: #{$tablet-large}	
+	--laptop: #{$laptop}	
+	--laptop-large: #{$laptop-large}	
+	--desktop: #{$desktop}	
+	--desktop-large: #{$desktop-large}	
+	--big-screen: #{$big-screen}
+	
+	//** Colour *//
+	--black: #{$black} 			
+	--text-black: #{$text-black} 	
+
+	//* Colours *//
+	--red: #{$red}		
+	--orange: #{$orange} 		
+	--yellow: #{$yellow} 		
+	--green: #{$green} 		
+	--blue: #{$blue} 		
+	--purple: #{$purple}	
+	--violet:	#{$violet} 
+	
+	//* Shades *//						 		
+	--white: #{$white}			
+	--shade-01: #{$shade-01}		
+	--shade-02: #{$shade-02}		
+	--shade-03: #{$shade-03}		 
+	--shade-04: #{$shade-04}		
+	--shade-05: #{$shade-05}	
+	
+	/* Brand colours *//
+	--brand-primary: #{$brand-primary}
+	--brand-darker: #{$brand-darker}
+	--brand-secondary: #{$brand-secondary}	
+	--brand-primary-invert: 	 #{$brand-primary-invert}
+	--brand-darker-invert: 	 #{$brand-darker-invert}
+	--brand-secondary-invert: #{$brand-secondary-invert}	
+
+	//** Typography  */
+	--serif-font: #{$serif-font}
+	--sans-font: #{$sans-font}
+	--base-font: #{$serif-font}
+	--heading-font: #{$sans-font}
+	
+	--text-colour: #{$text-black}
+	--heading-colour: #{$text-black}
+	--link-color: #{$brand-primary}
+	--link-active-color: #{$brand-primary}
+	
+	--text-line-height: #{$line-height}
+	--heading-line-height: 1.3
+	--text-font-weight: 400
+	--heading-font-weight: 700
+	
+	//* Pentatonic scale n = 5; r = 2 *//
+	--text--2: #{$text--2}	
+	--text--1: #{$text--1}		
+	--text-00: #{$text-00}		
+	--text-01: #{$text-01}		
+	--text-02: #{$text-02}		
+	--text-03: #{$text-03}  	
+	--text-04: #{$text-04}		
+	--text-10: #{$text-10}
+	--text-11: #{$text-11}		 
+	--text-12: #{$text-12}		
+	
+	--x-small-text:	#{$text--2}
+	--small-text: #{$text--1}
+	--regular-text: #{$text-00}
+	--h5-text: #{$text-01}
+	--h4-text: #{$text-02}
+	--h3-text: #{$text-03}
+	--h2-text: #{$text-04}
+	--h1-text: #{$text-10}
+	--large-text: #{$text-11}
+	--super-large-text: #{$text-12}
+	
+	--h5: #{$text-01}
+	--h4: #{$text-02}
+	--h3: #{$text-03}
+	--h2: #{$text-04}
+	--h1: #{$text-10}
+	
+	//* Animations */
+	--quicktrans: #{$quicktrans}
+	--medtrans: #{$medtrans}
+	--menuSlideTransition: #{$quicktrans}
+	--buttonTransition: #{$medtrans}
+	--easing: #{$easing}
+	--bounce: #{cubic-bezier(0.93,.1,.195,1)}
+
+
