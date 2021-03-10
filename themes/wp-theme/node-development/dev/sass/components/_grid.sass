@@ -1,4 +1,5 @@
 .bc-container
+	width: 100%
 	padding: var(--gutter)
 	@media screen and (min-width: ($max-content-width +100px))
 		padding-left:  calc((100% - var(--max-content-width)) / 2)
@@ -8,8 +9,8 @@
 	display: grid
 	grid-template-rows: auto 
 	gap: calc(var(--gutter)* 1.1)
-	
 	grid-template-columns: repeat(auto-fill, minmax(var(--min-col-width), 1fr))
+		
 	&--narrow-cols
 		@extend .bc-grid
 		grid-template-columns: repeat(auto-fill, minmax(var(--min-col-width-narrow), 1fr))
@@ -34,11 +35,12 @@
 [class~="bc-grid--x"] 
 	@extend .bc-grid
 	display: block
-	@media screen and (min-width: var(--tablet))
+	@media screen and (min-width: #{$tablet})
 		display: grid
 	
 /* Grid items */
-@media screen and (min-width: #{$laptop})
+//Span classes - effective from vw 1024px
+@media screen and (min-width: #{$tablet-large})
 	.bc-grid-span-2cols
 		grid-column-start: span 2
 	.bc-grid-span-3cols

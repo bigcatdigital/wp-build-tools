@@ -21,9 +21,45 @@ $desktop: 				1440px
 $desktop-large: 	1600px	
 $big-screen: 			1920px
 
-//** Colour *//
-$black: 			#000000 			
+//** Shades *//
+$white:				#fff
+$shade-f0:		#f0f0f0		
+$shade-e0:		#e0e0e0		
+$shade-d0:		#d0d0d0		
+$shade-b0:		#c0c0c0		
+$shade-c0:		#b0b0b0		
+$shade-a0:		#a0a0a0		 
+$shade-90:		#909090		
+$shade-80:		#808080		
+$shade-70:		#707070		
+$shade-60:		#606060
+$shade-50:		#505050
+$shade-40:		#404040
+$shade-30:		#303030
+$shade-20:		#202020
+$shade-10:		#101010
+$black: 			#000000 	
+
+$black-invert: $white 	
+$shade-f0-invert: $black
+$shade-e0-invert: $black 
+$shade-d0-invert: $black
+$shade-b0-invert: $black
+$shade-c0-invert: $black
+$shade-a0-invert: $black
+$shade-90-invert: $black
+$shade-80-invert: $black
+$shade-70-invert: $black
+$shade-60-invert: $white
+$shade-50-invert: $white
+$shade-40-invert: $white
+$shade-30-invert: $white
+$shade-20-invert: $white
+$shade-10-invert: $white
+$white-invert: $black 
+
 $text-black:	#303030 
+//** Colour *//
 $red: 		#f00
 $orange:	#f60 		
 $yellow:	#ff0 		
@@ -32,20 +68,21 @@ $blue:		#00f
 $purple:	#4B0082	
 $violet:	#9400D3 
 
-//** Shades *//
-$white:				 #fff
-$shade-01:		#f6f6f6		
-$shade-02:		#f0f0f0		
-$shade-03:		#e0e0e0		 
-$shade-04:		#e0e0e0		
-$shade-05:		#808080
+			
+$red-invert: 	 $white
+$orange-invert:	$black 		
+$yellow-invert:	$black 		
+$green-invert:	$white
+$blue-invert:		$white
+$purple-invert:	$white
+$violet-invert:	$white
 
-$shades: ('white': $white, 'shade-01': #{$shade-01}, 'shade-02': #{$shade-02}, 'shade-03': #{$shade-03}, 'shade-04': #{$shade-04}, 'shade-05': #{$shade-05})	
-$colours: ('white': #{$white}, 'black': #{$black}, 'red': #{$red}, 'orange': #{$orange}, 'yellow': #{$yellow}, 'green': #{$green}, 'blue': #{$blue}, 'puple': #{$purple}, 'violet': #{$violet}) 
+$shades: ('white': (#{$white}, #{$white-invert}), 'shade-f0': (#{$shade-f0}, #{$shade-f0-invert}), 'shade-e0': (#{$shade-e0}, #{$shade-e0-invert}), 'shade-d0': (#{$shade-d0}, #{$shade-d0-invert}), 'shade-c0': (#{$shade-c0}, #{$shade-c0-invert}), 'shade-b0': (#{$shade-b0}, #{$shade-b0-invert}), 'shade-a0': (#{$shade-a0}, #{$shade-a0-invert}), 'shade-90': (#{$shade-90}, #{$shade-90-invert}), 'shade-80': (#{$shade-80}, #{$shade-80-invert}), 'shade-70': (#{$shade-70}, #{$shade-80-invert}), 'shade-60': (#{$shade-60}, #{$shade-60-invert}), 'shade-50': (#{$shade-50}, #{$shade-50-invert}), 'shade-40': (#{$shade-40}, #{$shade-40-invert}), 'shade-30': (#{$shade-30}, #{$shade-30-invert}), 'shade-20': (#{$shade-20}, #{$shade-20-invert}), 'shade-10': (#{$shade-10}, #{$shade-10-invert}))	
+$colours: ('red': (#{$red}, #{$red-invert}), 'orange': (#{$orange}, #{$orange-invert}), 'yellow': (#{$yellow}, #{$yellow-invert}), 'green': (#{$green}, #{$green-invert}), 'blue': (#{$blue}, #{$blue-invert}), 'puple': (#{$purple}, #{$purple-invert}), 'violet': (#{$violet}, #{$violet-invert})) 
 
-$brand-primary: 		$shade-02
-$brand-darker: 			#{darken($shade-02, 12%)}
-$brand-secondary: 	$shade-04
+$brand-primary: 		$black
+$brand-darker: 			#{darken($black, 12%)}
+$brand-secondary: 	$shade-40
 
 $brand-primary-invert: 		$text-black
 $brand-darker-invert: 		$white
@@ -68,6 +105,10 @@ $text-10: 	2.0rem
 $text-11: 	2.2974rem		 
 $text-12: 	2.6390rem	
 
+$light-weight: 	300
+$font-weight: 	400
+$bold-weight: 	700
+
 //* Animations *//
 $quicktrans: 					240ms
 $medtrans: 						480ms
@@ -83,7 +124,7 @@ $easing: ease-in-out
 	--body-margin:		0 
 	--body-padding:		0 			
 	--content-max-width: 1600px
-	--text-max-width: 	 none 	
+	--text-max-width: 	 50rem
 	--base-cols: 4	
 	--min-col-width: #{$min-col-width}	
 	--min-col-width-narrow: #{$min-col-width-narrow}	
@@ -121,11 +162,21 @@ $easing: ease-in-out
 	
 	//* Shades *//						 		
 	--white: #{$white}			
-	--shade-01: #{$shade-01}		
-	--shade-02: #{$shade-02}		
-	--shade-03: #{$shade-03}		 
-	--shade-04: #{$shade-04}		
-	--shade-05: #{$shade-05}	
+	--shade-f0: #{$shade-f0}
+	--shade-e0: #{$shade-e0}
+	--shade-d0: #{$shade-d0}
+	--shade-c0: #{$shade-c0}
+	--shade-b0: #{$shade-b0}
+	--shade-a0: #{$shade-a0}
+	--shade-90: #{$shade-90}
+	--shade-80: #{$shade-80}
+	--shade-70: #{$shade-70}
+	--shade-60: #{$shade-60}
+	--shade-50: #{$shade-50}
+	--shade-40: #{$shade-40}
+	--shade-30: #{$shade-30}
+	--shade-20: #{$shade-20}
+	--shade-10: #{$shade-10}
 	
 	/* Brand colours *//
 	--brand-primary: #{$brand-primary}
@@ -143,13 +194,20 @@ $easing: ease-in-out
 	
 	--text-colour: #{$text-black}
 	--heading-colour: #{$text-black}
+
 	--link-color: #{$brand-primary}
-	--link-active-color: #{$brand-primary}
+	--link-active-color: #{$brand-darker}
+	--link-active-weight: #{$bold-weight}
 	
 	--text-line-height: #{$line-height}
 	--heading-line-height: 1.3
-	--text-font-weight: 400
-	--heading-font-weight: 700
+	--font-weight: #{$font-weight}
+	--bold-font-weight: #{$bold-weight} 
+	
+	--text-font-weight: #{$font-weight}
+	
+	--heading-font-weight: #{$bold-weight}
+	
 	
 	//* Pentatonic scale n = 5; r = 2 *//
 	--text--2: #{$text--2}	

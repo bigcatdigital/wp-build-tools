@@ -12,18 +12,30 @@ body
 	font-family: var(--base-font)
 	font-size: 100% 
 	line-height: 1.45  
-	background-color: var(--shade-01)
+	background-color: var(--shade-f0)
+
 h1, h2, h3, h4, h5
+	margin-top: 0
+	margin-bottom: var(--vertical-unit)
 	font-family: var(--heading-font) 
 	line-height: 1.35
 h1
 	font-size: 2.0581rem
 h2
-	font-size: 1.618rem
+	font-size: 1.618rem 
 h3
 	font-size: 1.272rem
+p, ul, blockquote
+	margin-top: 0
+	margin-bottom: var(--vertical-unit)
 button
 	font-family: var(--base-font)
+a 
+	color: var(--link-color)
+	transition: color var(--quicktrans) var(--easing)
+	@include linkHover
+		font-weight: var(--link-active-weight)
+		color: var(--link-active-color)
 .svg-icon
 	max-width: 	2rem
 	max-height: 2rem
@@ -39,10 +51,42 @@ button
 		font-size: 20px
 
 
+
+@import 'components/header.sass';	
 @import 'components/animations.sass';
 @import 'components/grid';
 @import 'components/hero'; 
 @import 'components/cards'; 
+@import 'components/bc-two-column-layout'; 
+@import 'components/flickity-sliders'; 
+
+
+/* Inner page header */
+.bc-site-header
+	& &__main-navigation
+		&__item
+			> a
+				@media screen and (max-width: calc(#{$tablet-large} - 1px))	
+					color: var(--text-black)
+
+/* Hero components overlay */
+.bc-hero
+	.bc-media-overlay
+	
+.bc-card 
+	& &__media 
+		background-color: var(--shade-60) 
+	&--plain-text 
+		background-color: var(--shade-e0)
+		@include linkHover
+			background-color: var(--shade-d0)
+			text-decoration: none
+			a 
+				text-decoration: underline
+				font-weight: var(--link-active-weight)
+			
+			
+
 
 
 

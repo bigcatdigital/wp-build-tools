@@ -29,16 +29,9 @@
 		@extend .bc-card 
 		justify-content: center
 		padding: var(--vertical-unit) var(--gutter)
-		background-color: var(--brand-primary)
 		color: var(--brand-primary-invert)
 		transition: background-color var(--quicktrans) var(--easing)
-		a 
-			text-decoration: none
-		@include linkHover
-			background-color: #{darken($brand-primary, 5%)}
-			text-decoration: none
-			a 
-				text-decoration: underline
+		
 	// .bc-card--plain-text
 	@at-root .bc-grid--collapsed 
 		.bc-card
