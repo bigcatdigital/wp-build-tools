@@ -62,20 +62,24 @@
 	@media screen and (min-width: #{$tablet-large}) 
 		&.bc-container
 			padding-top: calc(var(--vertical-unit) / 2)	
-	@at-root &.bc-hero__header
-		position: static
-		padding-left: 0
-		padding-right: 0
-		color: var(--text-black)
+	&.bc-is-hero-overlay
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		color: var(--white)
 		&.bc-is-active
 			.bc-site-header__menu-link
 				&__menu
 					fill: var(--black)
 				&__close
 					fill: var(--shade-06)
-			
+		.svg-icon
+			fill: var(--white)
 		@media screen and (min-width: #{$tablet-large}) 
-			color: var(--hero-text-color)
+			a
+				color: var(--white)
+		
 	
 .bc-breadcrummbs-nav
 	& &__list

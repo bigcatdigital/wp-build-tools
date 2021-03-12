@@ -33,18 +33,26 @@
 		text-decoration: none
 		@include linkHover
 			text-decoration: none
+	
 .bc-arrow-link
 	@include arrowLink
 	
-
+/* Text component */
 .bc-text-component
 	@include makeTextComponent
-	
+
+.bc-intro-paragraph
+	font-size: $text-01
+	font-weight: var(--bold-font-weight)
+
+/* Invisible content */
 .bc-is-hidden 
 	opacity: 0
 	visibility: hidden
 	height: 0
 	width: 0
+	margin: 0
+	padding: 0
 	line-height: 0
 	overflow: hidden
 

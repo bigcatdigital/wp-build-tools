@@ -9472,12 +9472,10 @@ return Flickity;
 
 
 (function bcAppJS() {
+	/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "^bc" }]*/
 	/* global Flickity */
 	const debug = true; 
-	/* 
-		GSAP Get Started tests
-		https://greensock.com/get-started/ 
-	*/  
+
 	console.log('WP Base Theme here');
 	if (debug) {	
 		console.log('Debug is go');
@@ -9485,9 +9483,223 @@ return Flickity;
 		console.log('...');
 	}
 	
+	/*** AJAX functions **/
+	function bcAJAX(url, options) {
+		if (options !== undefined) {
+			return fetch(url, options);	
+		} else {
+			return fetch(url);
+		}
+	}
+	function bcGetJSON(url, opts) {
+		let options = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		};
+		if (opts) {
+			options = Object.assign(options, opts);
+		}
+		return bcAJAX(url, options).then((data) => {
+			return Promise.resolve(data);
+		}).catch((err) => {
+			return Promise.reject(err);
+		});
+	}
+	
+	/*** Utils */
+	/*
+		Use getBoundingClientRect to get the top and left offsets for an element - used with lerp scroll for the target argument value
+		$el: the element whose offsets are required
+	*/
+	function bcGetOffset($el = document.querySelector('body')) {
+		if (debug) {
+			console.log(`bcGetOffset()`);	
+			console.log(`-------------`);	
+			console.log(`$el: ${$el}`);	
+		}
+		const elRect = $el.getBoundingClientRect();
+		const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+		const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		
+		return { top: elRect.top + scrollTop, left: elRect.left + scrollLeft };
+	} 
+	
+	/*** Animation functions **/
+	
+	/*
+		bcLerpScroll - scroll an element (usually the window) to some target target using linear interpolation
+			en.wikipedia.org/wiki/Linear_interpolation
+			
+		return: null
+		$el: and element to scroll
+		pos: start position
+		target: target position
+		[speed]: scroll speed 
+	*/
+	//Liner interpolation
+	if (debug) {
+		var i = 0;	
+	}
+	function bcLerpScroll($el, pos, target, speed = 0.075) {
+		if (debug) {
+			console.log(`Lerp ${i}`); 
+			console.log(`---------`);
+			console.log(`$el: ${$el} pos: ${pos} target: ${target} speed: ${speed}`);
+		}
+		let scrollOpts = {};
+		if (Math.round(target) > Math.round(pos)) {
+			if (debug) {
+				console.log(`${pos} ${target}`);
+				console.log(`${(pos - target)}`);
+			}
+			pos += (target - pos) * speed; 
+			if (debug) { 
+				console.log(`${pos} ${target}`);
+			}
+			scrollOpts = {
+				top: pos,
+				left: 0,
+				behavior: 'auto'
+			};
+			$el.scroll(0, pos);
+			if (debug) {
+				console.log(`${$el.scrollY}`);
+				i++;
+			}
+			requestAnimationFrame(() => {
+				bcLerpScroll($el, pos, target); 
+			});
+		} else if (Math.round(pos) > Math.round(target)) {
+			if (debug) {
+				console.log(`${pos} ${target}`);
+				console.log(`${(pos - target)}`);
+			}
+			pos -= (pos - target) * speed; 
+			if (debug) {
+				console.log(`${pos} ${target}`);	
+			}
+			scrollOpts = {
+				top: pos,
+				left: 0,
+				behavior: 'auto'
+			};
+			$el.scroll(scrollOpts);
+			if (debug) {
+				console.log(`${$el.scrollY}`);
+				i++;	
+			}
+			requestAnimationFrame(() => {
+				bcLerpScroll($el, pos, target);
+			});
+		} else {
+			return;
+		} 
+	}//Lerp scroll
+	/*
+		bcAdjustHeight - adjust the height of an element to some target target using linear interpolation
+		It is a show/hide function with a callback
+		Wrapper for bcLearpHeight
+			en.wikipedia.org/wiki/Linear_interpolation
+			
+		return: null
+		$el: and element show/hide
+		pos: start position
+		target: target position
+		[speed]: scroll speed 
+		[cb]: callback function
+	*/
+	function bcAdjustHeight($el, target, speed = 0.075, cb = null) {
+		bcLerpHeight($el, target, speed) ;	
+		function bcLerpHeight($el, target, speed = 0.075) {
+			if (debug) {
+				console.log(`$el height: ${$el.style.height}`); 
+			}
+			//the currrent el height
+			let h = ($el.style.height !== '' && $el.style.height !== undefined ) ? parseFloat($el.style.height) : $el.clientHeight;
+			if (debug) {
+				if (i > 500) {
+					return;
+				}
+				console.log(`Lerp ${i}`); 
+				console.log(`---------`);
+				console.log(`Height: ${h} Target: ${target}`);
+				console.log(`Difference: ${(h - target)}`);
+			}
+			if (Math.round(target) > Math.round(h)) {
+				if (debug) {
+					console.log(`Target > Height`);
+					console.log(`Raw height to add: ${(target - h) * speed}`); 
+				}
+				h += (target - h) * speed; 
+				if (debug) { 
+					console.log(`New height: ${h} Target: ${target}`);
+				}
+				$el.style.height = h + 'px';
+				if (debug) {
+					console.log(`Element style.height: ${$el.style.height}`);
+					i++;
+				}
+				requestAnimationFrame(() => {
+					bcLerpHeight($el, target, speed); 
+				});
+			} else if (Math.round(h) > Math.round(target)) {
+				if (debug) {
+					console.log(`Height > Target`);
+					console.log(`Raw height to subtract: ${(h - target) * speed}`); 
+				}
+				h -= (h - target) * speed; 
+				if (debug) {
+					console.log(`New height: ${h} Target: ${target}`);	
+				}
+				$el.style.height = h + 'px';
+				if (debug) {
+					console.log(`${$el.style.height}`);
+					i++;	
+				}
+				requestAnimationFrame(() => {
+					bcLerpHeight($el, target, speed);
+				});
+			} else {
+				return;
+			} 
+		}//Lerp scroll
+		if (typeof cb === 'function') {
+			cb();	
+		}
+		return;
+	}//bcAdjustHeight
+	
+	
+	/* 
+		Scroll links
+		For on page vertical scrolling
+	*/
+	if (debug) {
+		console.log('Scroll links');
+		console.log('------------');
+	}
+	const scrollLinks = Array.from(document.querySelectorAll('.bc-scroll-link'));
+	if (debug) {
+		console.log(`scrollLinks length: ${scrollLinks.length}`);
+	}
+	
+	scrollLinks.forEach(($link) => {
+		if (debug) {
+			console.log($link);
+		}
+		if (document.getElementById($link.getAttribute('href').substr(1))) {
+			$link.addEventListener('click', (evt) => {
+				evt.preventDefault();
+				const $scrollTargetEl = document.getElementById($link.getAttribute('href').substr(1));
+				const scrollTarget = bcGetOffset($scrollTargetEl).top;
+				bcLerpScroll(document.documentElement, document.documentElement.scrollTop, scrollTarget);		
+			});
+		}
+		
+	});
 	
 	/* Main site navigation */
-	
 	function mainNavigationSetup() {
 		if (window.outerWidth >= 1024 ) {
 			return true;
