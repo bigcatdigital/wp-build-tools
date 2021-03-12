@@ -94,6 +94,7 @@
     "copy:css": "find dev/. -type f \"(\" -iname \"*.css\" -o -iname \"*.css.map\" \")\" | xargs -Ifile rsync -vR file ../assets/ && echo file 'copied' '\n'",
     "copy:js": "find dev/. -type f -name \"*.js\" | xargs -Ifile rsync -vR file ../assets/ && echo file 'copied' '\n'",
     "copy:media": "find dev/. -type f \"(\" -iname \"*.jpg\" -o -iname \"*.png\" \")\" | xargs -Ifile rsync -vR file ../assets/",
+		"copy:githubroot": "rsync -av --exclude={'node-development','*.php'} ../ ../../../",
     "criticalcss": "node ./bc_modules/critical-css.js",
     "server": "node live-server.js",
     "copy:docs": "cp -r ./dist/. ./docs/"
