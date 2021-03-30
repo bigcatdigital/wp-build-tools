@@ -100,12 +100,6 @@
   --easing: ease-in-out;
   --bounce: cubic-bezier(0.93, 0.1, 0.195, 1); }
 
-:root {
-  --content-max-width: 88%;
-  --line-height:			1.45;
-  --feature-padding: 1.5rem * 3;
-  --bold-font-weight: 700; }
-
 /** Utilities **/
 /* Media */
 .bc-media-overlay {
