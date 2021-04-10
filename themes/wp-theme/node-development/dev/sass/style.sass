@@ -95,6 +95,51 @@ iframe
 			a 
 				text-decoration: underline
 				font-weight: var(--link-active-weight)
+		
+/* Transcript for object embeds */
+.bc-show-hide
+	margin-top: calc(var(--vertical-unit) / 2 * -1)
+	margin-bottom: var(--vertical-unit)
+	& &__toggle
+		position: relative
+		@include makeFlexbox($align: center)
+		padding-bottom: var(--vertical-unit)
+		font-family: var(--heading-font)
+		font-size: var(--text-01)
+		font-weight: var(--bold-font-weight)
+		text-decoration: none
+		@include linkHover
+			text-decoration: underline
+			cursor: pointer
+		&.bc-is-active 
+			.bc-show-hide-icon
+				&.bc-show-hide-icon__hide
+					opacity: 1
+				&.bc-show-hide-icon__show
+					opacity: 0
+			
+	& &-icon
+		position: absolute
+		right: 0
+		width:  var(--text-02)
+		height: var(--text-02)  
+		opacity: 1
+		z-index: 10		
+		transition: opacity var(--quicktrans) var(--easing)
+		&.bc-show-hide-icon__hide
+			opacity: 0
+			transform: rotate(180deg)
+	& &__hide-icon
+		opacity: 0	
+	& &__body
+		height: 0
+		overflow: hidden 
+		padding-left:  calc(var(--gutter) / 2)
+		padding-right: calc(var(--gutter) / 2)
+		transition: padding var(--medtrans) var(--easing), height var(--medtrans) var(--easing)
+		&.bc-is-active
+			padding-top: 		var(--vertical-unit)
+			padding-bottom: var(--vertical-unit)
 			
 			
 

@@ -75,7 +75,7 @@
 			console.log(`$el: ${$el} pos: ${pos} target: ${target} speed: ${speed}`);
 		}
 		let scrollOpts = {};
-		if (Math.round(target) > Math.round(pos)) {
+		if (Math.floor(target) > Math.floor(pos)) {
 			if (debug) {
 				console.log(`${pos} ${target}`);
 				console.log(`${(pos - target)}`);
@@ -97,9 +97,9 @@
 			requestAnimationFrame(() => {
 				bcLerpScroll($el, pos, target); 
 			});
-		} else if (Math.round(pos) > Math.round(target)) {
+		} else if (Math.floor(pos) > Math.floor(target)) {
 			if (debug) {
-				console.log(`${pos} ${target}`);
+				console.log(`${pos} ${target}`); 
 				console.log(`${(pos - target)}`);
 			}
 			pos -= (pos - target) * speed; 
@@ -153,7 +153,7 @@
 				console.log(`Height: ${h} Target: ${target}`);
 				console.log(`Difference: ${(h - target)}`);
 			}
-			if (Math.round(target) > Math.round(h)) {
+			if (Math.floor(target) > Math.floor(h)) {
 				if (debug) {
 					console.log(`Target > Height`);
 					console.log(`Raw height to add: ${(target - h) * speed}`); 
@@ -162,15 +162,18 @@
 				if (debug) { 
 					console.log(`New height: ${h} Target: ${target}`);
 				}
-				$el.style.height = h + 'px';
+				requestAnimationFrame(() => {
+					$el.style.height = h + 'px';	
+				});
+				//$el.style.height = h + 'px';
 				if (debug) {
 					console.log(`Element style.height: ${$el.style.height}`);
 					i++;
 				}
-				requestAnimationFrame(() => {
-					bcLerpHeight($el, target, speed); 
-				});
-			} else if (Math.round(h) > Math.round(target)) {
+				
+				bcLerpHeight($el, target, speed); 
+				
+			} else if (Math.floor(h) > Math.floor(target)) {
 				if (debug) {
 					console.log(`Height > Target`);
 					console.log(`Raw height to subtract: ${(h - target) * speed}`); 
@@ -179,14 +182,15 @@
 				if (debug) {
 					console.log(`New height: ${h} Target: ${target}`);	
 				}
-				$el.style.height = h + 'px';
+				requestAnimationFrame(() => {
+					$el.style.height = h + 'px';
+				});
 				if (debug) {
 					console.log(`${$el.style.height}`);
 					i++;	
 				}
-				requestAnimationFrame(() => {
-					bcLerpHeight($el, target, speed);
-				});
+				bcLerpHeight($el, target, speed);
+				
 			} else {
 				return;
 			} 
@@ -225,6 +229,83 @@
 		}
 		
 	});
+	
+	/* Show/hide (accordion) components */
+	function bcShowHide($el, height, target, cb) {
+		console.log(height);
+		console.log(target);
+		$el.style.height = target + 'px';
+		if (typeof cb === 'function') {
+			$el.addEventListener('transitionend', () => {
+				requestAnimationFrame(() => {
+					cb();
+				});	
+				$el.removeEventListener('transitionend', arguments.callee);
+			});
+			
+		}
+		
+	}
+	const showHideComponents = Array.from(document.querySelectorAll('.bc-show-hide'));
+	if (debug){
+		console.log(`Show/hide components`);
+		console.log(`--------------------`);
+		console.log(`Length: ${showHideComponents.length}`);
+	}
+	showHideComponents.forEach(($showHideComponent, idx) => {
+		if (debug) {
+			console.log(`Show hide component #${idx + 1}:`);
+			console.log($showHideComponent.classList);	
+		}
+		//bcAdjustHeight()
+		//Used for the skip link
+		const $nextSibling =  $showHideComponent.nextElementSibling;
+		const $skipLink =  $showHideComponent.querySelector('.bc-show-hide__skip');
+		if (debug) {
+			console.log(`Skip link: ${$skipLink.classList}`);
+			console.log(`Next sibling: ${$nextSibling}`);
+		}
+		//If there is a next sibling and it has an ID
+		if ($nextSibling && $nextSibling.getAttribute('id') !== undefined) {
+			$skipLink.setAttribute('href', '#' + $nextSibling.getAttribute('id')) ;
+		} else if ($nextSibling) {
+			//If there is a next sibling 
+			$nextSibling.setAttribute('href', '#' + $skipLink.getAttribute('href').substr(1)) ;
+		} else {
+			//There is no next sibling - don't display
+			$skipLink.style.display = 'inherit';
+		}
+		//Show hide toggles
+		const showHideToggles = Array.from($showHideComponent.querySelectorAll('.bc-show-hide__toggle'));
+		showHideToggles.forEach(($showHideToggle) => {
+			const $showHideBody = $showHideToggle.nextElementSibling;
+			if (debug) {
+				console.log('Show hide body scrollHeight: ');
+				console.log($showHideBody.scrollHeight);
+				console.log('Show hide toggle classlist: ');
+				console.log($showHideToggle.classList);
+			}
+			$showHideToggle.addEventListener('click', (evt) => {
+				evt.preventDefault();
+				
+				if ($showHideToggle.classList.contains('bc-is-active')) {
+					if (debug) {
+						console.log('This show body is active.');
+					}
+					bcShowHide($showHideBody,  $showHideBody.scrollHeight, 0);
+					$showHideToggle.classList.toggle('bc-is-active');
+				} else {
+					if (debug) {
+						console.log('This show body is inactive.');
+					}
+					bcShowHide($showHideBody, 0,  $showHideBody.scrollHeight);	
+					$showHideToggle.classList.toggle('bc-is-active');
+				}
+				
+			});
+		});
+	});
+	
 	
 	/* Main site navigation */
 	function mainNavigationSetup() {
