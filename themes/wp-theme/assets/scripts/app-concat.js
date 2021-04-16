@@ -9541,38 +9541,42 @@ return Flickity;
 	if (debug) {
 		var i = 0;	
 	}
-	function bcLerpScroll($el, pos, target, speed = 0.075) {
+	function bcLerpScroll($el, pos, target, speed = 0.1) {
+		pos = Math.floor(pos);
+		target = Math.floor(target);
 		if (debug) {
 			console.log(`Lerp ${i}`); 
 			console.log(`---------`);
-			console.log(`$el: ${$el} pos: ${pos} target: ${target} speed: ${speed}`);
+			console.log(`$el: ${$el.classList} pos: ${Math.floor(pos)} target: ${Math.floor(target)} speed: ${speed}`);
 		}
 		let scrollOpts = {};
-		if (Math.floor(target) > Math.floor(pos)) {
+		//Scroll down
+		if (Math.floor(pos) < Math.floor(target)) {
 			if (debug) {
-				console.log(`${pos} ${target}`);
-				console.log(`${(pos - target)}`);
+				console.log(`Scroll down`);
+				console.log(`Target - Pos * speed: ${Math.ceil((target - pos) * speed)}`);
 			}
-			pos += (target - pos) * speed; 
+			pos += Math.ceil((target - pos) * speed); 
 			if (debug) { 
-				console.log(`${pos} ${target}`);
+				console.log(`New postion: ${pos} ${target}`);
 			}
 			scrollOpts = {
 				top: pos,
 				left: 0,
 				behavior: 'auto'
 			};
-			$el.scroll(0, pos);
+			$el.scroll(scrollOpts);
 			if (debug) {
-				console.log(`${$el.scrollY}`);
 				i++;
 			}
 			requestAnimationFrame(() => {
 				bcLerpScroll($el, pos, target); 
 			});
+		//Scroll up
 		} else if (Math.floor(pos) > Math.floor(target)) {
 			if (debug) {
-				console.log(`${pos} ${target}`); 
+				console.log(`Scroll up`);
+				console.log(`${pos} ${target}`);
 				console.log(`${(pos - target)}`);
 			}
 			pos -= (pos - target) * speed; 
@@ -9593,6 +9597,18 @@ return Flickity;
 				bcLerpScroll($el, pos, target);
 			});
 		} else {
+			if (debug) {
+				console.log('Snap to target');
+			}
+			scrollOpts = {
+				top: target,
+				left: 0,
+				behavior: 'auto'
+			};
+			$el.scroll(scrollOpts);
+			if (debug) {
+				console.log(`Target: ${target} Final position: ${$el.scrollY}`);
+			}
 			return;
 		} 
 	}//Lerp scroll
@@ -9631,7 +9647,7 @@ return Flickity;
 					console.log(`Target > Height`);
 					console.log(`Raw height to add: ${(target - h) * speed}`); 
 				}
-				h += (target - h) * speed; 
+				h += Math.ceil((target - h) * speed); 
 				if (debug) { 
 					console.log(`New height: ${h} Target: ${target}`);
 				}
@@ -9651,7 +9667,7 @@ return Flickity;
 					console.log(`Height > Target`);
 					console.log(`Raw height to subtract: ${(h - target) * speed}`); 
 				}
-				h -= (h - target) * speed; 
+				h -= Math.ceil((h - target) * speed); 
 				if (debug) {
 					console.log(`New height: ${h} Target: ${target}`);	
 				}
