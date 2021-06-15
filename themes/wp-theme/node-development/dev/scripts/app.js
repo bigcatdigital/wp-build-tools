@@ -315,7 +315,6 @@
 		});
 	});
 	
-	
 	/* Main site navigation */
 	function mainNavigationSetup() {
 		if (window.outerWidth >= 1024 ) {
@@ -397,7 +396,62 @@
 		});
 		
 	}//end if $bcFlkSliders
-	
+	/* Custom -- services - corporate/individual - homepage */
+	if (debug) {
+		console.log('');
+		console.log('Services component');
+		console.log('------------------');
+	}
+	const $bcTwinComponents = Array.from(document.querySelectorAll('.bc-twin-component'));
+	if ($bcTwinComponents.length > 0) {
+		//* For each service block on the page */
+		$bcTwinComponents.forEach(($bcTwinComponent) => {
+			/* Set up the images - array and current active image ID */
+			const componentImages = Array.from($bcTwinComponent.querySelectorAll('.bc-twin-component__image'));
+			
+			if (componentImages.legth === 0) {
+				return;
+			}
+			/* The service triggers - on hover */
+			
+			const componentTriggers = Array.from($bcTwinComponent.querySelectorAll('.bc-twin-component__trigger'));
+			
+			if (componentTriggers.length > 0) {
+				componentTriggers.forEach(($componentTrigger) => {
+					$componentTrigger.addEventListener('mouseover', (evt) => { 
+						evt.stopPropagation();
+						const $thisTrigger = evt.currentTarget;
+						const serviceID = $thisTrigger.dataset.service;
+						if ($thisTrigger.classList.contains('is-active')) {
+							return;
+						}
+						const $activeServiceImage = componentImages.find(($serviceImage) => {
+							return $serviceImage.classList.contains('is-active');	
+						});	
+						if ($activeServiceImage.getAttribute('id') === serviceID) {
+							return;
+						}
+						$activeServiceImage.classList.remove('is-active');	
+						const $newServiceImage = $bcTwinComponent.querySelector('#' + serviceID);
+						if ($newServiceImage) {
+							$newServiceImage.classList.add('is-active');
+							$thisTrigger.classList.add('is-active');
+						} else {
+							return;
+						}
+					});// This $componentTrigger mouseover
+					componentTriggers.forEach(componentTrigger => {
+						componentTrigger.addEventListener('mouseleave', (evt) => {
+							evt.preventDefault();
+							componentTrigger.classList.remove('is-active');
+						});
+					});
+				});// componentTriggers for each
+			}// end if componentTriggers
+		});// end $bcTwinComponents for each
+	}//end if $bcTwinComponents is > 0
+
+
 	window.addEventListener('resize', () => {
 		mainNavigationSetup();
 	});
