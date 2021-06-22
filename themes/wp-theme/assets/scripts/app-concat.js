@@ -9474,7 +9474,7 @@ return Flickity;
 (function bcAppJS() {
 	/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "^bc" }]*/
 	/* global Flickity */
-	const debug = true; 
+	let debug = false; 
 
 	console.log('WP Base Theme here');
 	if (debug) {	
@@ -9790,6 +9790,7 @@ return Flickity;
 	
 	/* Main site navigation */
 	function mainNavigationSetup() {
+		debug = true;
 		if (window.outerWidth >= 1024 ) {
 			return true;
 		}
@@ -9800,7 +9801,6 @@ return Flickity;
 			if (debug) {
 				console.log(`Main navigation set up`);
 				console.log(`----------------------`);
-				
 				console.log(`window.outerWidth is ${window.outerWidth}`);
 			}
 		}	
@@ -9813,13 +9813,18 @@ return Flickity;
 			onclick navLink
 			-- nav visible --
 		*/
-		$siteHeaderMenuLink.addEventListener('click', (evt) => {
+		function menuIconClickHandler(evt) {
 			evt.preventDefault();
-			console.log(`Header class list: ${$siteHeader.classList}`);
 			$siteHeader.classList.toggle('bc-is-active'); 
-		});
+			//if (debug) {
+			console.log(`Header class list: ${$siteHeader.classList}`);
+			//}
+			
+		}
+		$siteHeaderMenuLink.removeEventListener('click', menuIconClickHandler);
+		$siteHeaderMenuLink.addEventListener('click', menuIconClickHandler);
 		
-		
+		debug = false;
 	}//mainNavigationSetup()
 	mainNavigationSetup();
 	
@@ -9926,7 +9931,7 @@ return Flickity;
 
 
 	window.addEventListener('resize', () => {
-		mainNavigationSetup();
+		//mainNavigationSetup();
 	});
 	
 	
