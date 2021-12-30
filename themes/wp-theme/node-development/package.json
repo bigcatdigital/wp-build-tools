@@ -62,7 +62,7 @@
     },
     "copy:css": {
       "patterns": [
-        "dev"
+        "dev/*"
       ],
       "extensions": "css"
     }
@@ -71,10 +71,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
 		
 		"set-env-vars": "export projdev=$(pwd) && cd ../../../ && export projroot=$(pwd) && cd $projdev && echo projdev: $projdev && echo projroot: $projroot",
-    "start": "npm run watch:sass & npm run watch:css & npm run watch:media & npm run watch:svg & npm run watch:js & npm run watch:css",
-    "build": "npm run sass:build & npm run copy:css & run babeljs & npm run uglifyjs & npm run concatjs & npm run postcss & npm run criticalcss ",
+    "start": "npm run watch:sass & npm run watch:css &  npm run watch:media & npm run watch:svg & npm run watch:js & npm run watch:css",
+    "build": "npm run sass:build && npm run copy:css && npm run babeljs && npm run uglifyjs && npm run concatjs:build && npm run postcss",
     "stop": "stop http-server",
-    "sass": "node-sass --sourceMap=true -w ./dev/sass/ -o ./dev/css/",
+    "sass": "node-sass --sourceMap=true ./dev/sass/ -o ./dev/css/",
     "sass:build": "node-sass ./dev/sass/ -o ./dev/css/",
     "watch:sass": "npm-watch sass",
     "watch:html": "npm-watch copy:html",
@@ -87,10 +87,11 @@
     "svgstore": "node ./bc_modules/svgstore.js",
     "js:dev": "npm run js:lint && npm run concatjs",
     "js:lint": "./node_modules/.bin/eslint ./dev/scripts/",
-    "babeljs": "./node_modules/.bin/babel ./dist/scripts/dev.js -o ./dist/scripts/dev.js",
-    "uglifyjs": "uglifyjs ./dist/scripts/dev.js -o ./dist/scripts/dev.js",
+    "babeljs": "./node_modules/.bin/babel ./dev/scripts/app.js -o ./dev/scripts/temp/app-temp.js",
+    "uglifyjs": "uglifyjs ./dev/scripts/temp/app-temp.js -o ./dev/scripts/temp/app-temp.js --comments=some ",
     "lintcss": "csslint ./dev/css/style.css && copy:css",
     "concatjs": "node ./bc_modules/concatente-js.js",
+		"concatjs:build": "node ./bc_modules/concatente-js.js -m=build -d",
     "postcss": "find dev/. -type f -name \"*.css\" | xargs -Ifile ./node_modules/.bin/postcss file -d ../assets/css/",
     "copy:html": "find dev/. -type f -name \"*.html\" | xargs -Ifile rsync -vR file ../ && echo '\n'",
     "copy:css": "find dev/. -type f \"(\" -iname \"*.css\" -o -iname \"*.css.map\" \")\" | xargs -Ifile rsync -vR file ../assets/ && echo file 'copied' '\n'",

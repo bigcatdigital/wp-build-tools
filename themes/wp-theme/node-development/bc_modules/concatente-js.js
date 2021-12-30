@@ -4,32 +4,57 @@ const path = require('path');
 const yargs = require('yargs');
 const messagePrefix = '[concatenate-js]';
 
+/* Args - mode [dev, build] */
 const argv = yargs.option('debug', {
 	alias: 'd',
 	description: 'Run in debug mode',
 	type: 'boolean',
 	default: false
-}).usage(messagePrefix + ' Indicate to run in debug mode the command line').argv;
+}).option('buildMode', {
+	alias: 'm',
+	description: 'Build mode',
+	type: 'string',
+	default: 'dev'
+}).argv;
 
-/* Must have concatenate config */
-if (!fs.statSync('./concatenate-js.config.js').isFile()) {
-	throw new Error(messagePrefix + ' Provide concatenate-js.config.js at the project root.');
+/* Must have config.js for file paths */
+if (!fs.statSync('./config.js').isFile()) {
+	throw new Error(messagePrefix + ' Provide config.js at the project root.');
 }
-const config = require('../concatenate-js.config.js');
+const filePaths = require('../config.js');
 /* Debug? */
-debug = (argv.debug) ? arvg.debug : debug;
+debug = (argv.debug) ? true : false;
 if (debug) {
 	console.log(`${messagePrefix}: ** concatenate-js.js debug **`);	
 }
-
-/* Get the source files */
-const filesToConcat = (config.files) ? config.files : Error(messagePrefix + ' Provide source files in concatenate-js.config.js at the project root.');
-/* Get the target */
-const targetFile = (config.target) ? config.target : Error(messagePrefix + ' Provide target file in concatenate-js.config.js at the project root.');
+/* Build mode */
+const buildMode = argv.buildMode;
 if (debug) {
-	console.log(`${messagePrefix}:  Target file: ${targetFile}`);	
+	console.log(`${messagePrefix} build mode: ** ${buildMode} **`);	
 }
-if (filesToConcat.length) {
+/* Get the source files */
+const filesToConcat = [];
+/* Vendor files */
+filePaths.js.vendor.forEach(filePath => {
+	filesToConcat.push(filePath);
+});
+/* App files ? dev or build mode */
+if (argv.buildMode == 'build') {
+	filePaths.js.build.forEach(filePath => {
+		filesToConcat.push(filePath);
+	});
+} else {
+	filePaths.js.dev.forEach(filePath => {
+		filesToConcat.push(filePath);
+	});
+}
+/* Get the target */
+const targetFile = (filePaths.js.target) ;
+console.log(`${messagePrefix} Starting..`);	
+console.log(`${messagePrefix} Source files: ${filesToConcat}`);	
+console.log(`${messagePrefix} Target: ${targetFile}`);	
+
+if (filesToConcat.length > 0) {
 	if (debug) {
 		console.log(``);	
 		console.log(`${messagePrefix}: * Process files *`);	
@@ -44,7 +69,7 @@ if (filesToConcat.length) {
 		}
 		/* Open a new target file */
 		if (debug === true) {
-			console.log(`${messagePrefix}: Open target file: ${targetFile}`);	
+			console.log(`${messagePrefix} Open target file: ${targetFile}`);	
 		}
 		const targetFD = fs.openSync(targetFile, 'a+');
 		
@@ -58,18 +83,18 @@ if (filesToConcat.length) {
 		}
 		/* append that to the target file */ 
 		if (debug === true) {
-			console.log(`Read file: ${targetFD}`);	
+			console.log(`${messagePrefix} Read file FD: ${targetFD}`);	
 		}
 		fs.appendFileSync(targetFD, inputFileData);
 		fs.closeSync(targetFD);
+		console.log(`${messagePrefix} File written: ${targetFile}`);	
 	} catch (err) {
-		console.log(`${messagePrefix}: ${err.message}`);
+		console.log(`${messagePrefix} Error: ${err.message}`);
 		if (debug) {
 			console.log(`${err.stack}`);	
 		}
-		return console.log(`${messagePrefix}: Exit...`);
+		return console.log(`${messagePrefix} Exit...`);
 	}
-	
 } else {
-	return console.log(messagePrefix + ' No findable files in concatenate-js.config.js');
+	return console.log(messagePrefix + ' No findable files in ../config.js');
 }

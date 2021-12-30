@@ -571,8 +571,15 @@ iframe {
   flex-wrap: wrap;
   align-items: flex-start;
   color: var(--text-black); }
-  .bc-site-header .bc-site-header__menu-link, .bc-site-header .bc-site-header__home-link {
-    z-index: 20; }
+  .bc-site-header .bc-site-header__home-link, .bc-site-header .bc-site-header__menu-link {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center; }
+  .bc-site-header .bc-site-header__menu-link {
+    justify-content: flex-end; }
   .bc-site-header .bc-site-header__menu-link__close {
     display: none;
     fill: var(--shade-60); }
@@ -648,7 +655,8 @@ iframe {
     top: 0;
     left: 0;
     width: 100%;
-    color: var(--white); }
+    color: var(--white);
+    z-index: 20; }
     .bc-site-header.bc-is-hero-overlay.bc-is-active .bc-site-header__menu-link__menu {
       fill: var(--black); }
     .bc-site-header.bc-is-hero-overlay.bc-is-active .bc-site-header__menu-link__close {
@@ -761,6 +769,24 @@ iframe {
   .bc-grid-span-4cols {
     grid-column-start: span 4; } }
 
+/* Content components */
+.bc-content-component, .bc-content-component--media, .bc-content-component--media-padded, .bc-content-component--text {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: calc(var(--gutter) /2);
+  padding-right: calc(var(--gutter) /2); }
+  @media screen and (min-width: 1024px) {
+    .bc-content-component--text {
+      max-width: calc(100% - 23.6%); } }
+  @media screen and (min-width: 1024px) {
+    .bc-content-component--media, .bc-content-component--media-padded {
+      max-width: calc(100% - 11.8%); } }
+  @media screen and (max-width: 1023px) {
+    .bc-content-component--media {
+      padding-left: 0;
+      padding-right: 0; } }
+
 .bc-hero, .bc-hero--full-screen {
   --hero-text-color: #fff;
   position: relative;
@@ -860,7 +886,7 @@ iframe {
     margin-top: 0;
     margin-bottom: calc(var(--vertical-unit) /2); }
   .bc-card .bc-card__heading {
-    font-size: var(--text-03); }
+    font-size: var(--h2-text); }
   .bc-card .bc-card__media {
     width: 100%;
     margin-bottom: var(--vertical-unit); }
@@ -1133,5 +1159,3 @@ table {
     .bc-show-hide .bc-show-hide__body.bc-is-active {
       padding-top: var(--vertical-unit);
       padding-bottom: var(--vertical-unit); }
-
-/*# sourceMappingURL=style.css.map */
