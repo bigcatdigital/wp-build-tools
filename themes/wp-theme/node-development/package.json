@@ -12,7 +12,7 @@
   "author": "Michael Mason",
   "license": "ISC",
   "browserslist": [
-    "> 1%"
+		"ie 11"
   ],
   "watch": {
     "sass": {
@@ -69,7 +69,6 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		
 		"set-env-vars": "export projdev=$(pwd) && cd ../../../ && export projroot=$(pwd) && cd $projdev && echo projdev: $projdev && echo projroot: $projroot",
     "start": "npm run watch:sass & npm run watch:css &  npm run watch:media & npm run watch:svg & npm run watch:js & npm run watch:css",
     "build": "npm run sass:build && npm run copy:css && npm run babeljs && npm run uglifyjs && npm run concatjs:build && npm run postcss",
@@ -86,7 +85,7 @@
     "watch:svgimgs": "npm-watch svgstore:imgs",
     "svgstore": "node ./bc_modules/svgstore.js",
     "js:dev": "npm run js:lint && npm run concatjs",
-    "js:lint": "./node_modules/.bin/eslint ./dev/scripts/",
+    "js:lint": "./node_modules/.bin/eslint ./dev/scripts/app.js -o ./dev/scripts/temp/app-temp.js",
     "babeljs": "./node_modules/.bin/babel ./dev/scripts/app.js -o ./dev/scripts/temp/app-temp.js",
     "uglifyjs": "uglifyjs ./dev/scripts/temp/app-temp.js -o ./dev/scripts/temp/app-temp.js --comments=some ",
     "lintcss": "csslint ./dev/css/style.css && copy:css",

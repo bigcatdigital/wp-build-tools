@@ -55,6 +55,7 @@
 		margin-bottom: 0
 	&.bc-is-active
 		.bc-site-header__menu-link
+			z-index: 20
 			&__close
 				display: block
 			&__menu
@@ -63,6 +64,7 @@
 			right: 0
 			opacity: 1
 	@media screen and (min-width: #{$tablet-large}) 
+		align-items: stretch
 		&.bc-container
 			padding-top: calc(var(--vertical-unit) / 2)	
 	&.bc-is-hero-overlay
@@ -72,19 +74,9 @@
 		width: 100%
 		color: var(--white)
 		z-index: 20
-		&.bc-is-active
-			.bc-site-header__menu-link
-				&__menu
-					fill: var(--black)
-				&__close
-					fill: var(--shade-06)
-		.svg-icon
-			fill: var(--white)
-		@media screen and (min-width: #{$tablet-large}) 
-			a
-				color: var(--white)
+		a
+			color: var(--white)
 		
-	
 .bc-breadcrummbs-nav
 	& &__list
 		@include makeFlexbox($align: center)

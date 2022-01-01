@@ -330,7 +330,7 @@
 				console.log(`----------------------`);
 				console.log(`window.outerWidth is ${window.outerWidth}`);
 			}
-		}	
+		}	 
 		
 		/* 
 			start
