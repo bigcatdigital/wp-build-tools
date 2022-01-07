@@ -9689,8 +9689,6 @@ return Flickity;
 		}
 		return;
 	}//bcAdjustHeight
-	
-	
 	/* 
 		Scroll links
 		For on page vertical scrolling
@@ -9787,7 +9785,49 @@ return Flickity;
 			});
 		});
 	});
-	
+
+	/* Cookies handlers */
+	if (debug) {
+		console.log('** Cookies functions **');
+	}
+	function bcGetCookie(cname) {
+		const documentCookies = document.cookie.split(';');
+		const matchedCookie = documentCookies.find((row) => {
+			if (debug) {
+				console.log('getCookie() cname : '+ cname+'=');
+				console.log('getCookie() row: '+ row);
+			}
+			if (row.startsWith(cname+'=')) {
+				console.log('getCookie() found it: '+ row);
+			}
+			return row.startsWith(cname+'=');
+		});
+		return matchedCookie;
+	}
+	function bcSetCookie(cname, cvalue, opts) {
+		let newCookie = cname + '=' + encodeURI(cvalue);
+		debug = true;
+		if (typeof opts === 'object') {
+			if (debug) {
+				console.log('opts is an object');
+			}
+			let optNames = Object.getOwnPropertyNames(opts);
+			optNames.forEach((key) => {
+				newCookie += '; ' + key + '=' + opts[key];
+			});
+		}
+		if (debug) {
+			console.log('New cookie is: '+newCookie);
+		}
+		document.cookie	= newCookie; 
+		if (debug) {
+			console.log('setCookie() document.cookie = '+ document.cookie);
+		}
+	}
+	if (debug) {
+		console.log('** Cookies functions **');
+	}
+
 	/* Main site navigation */
 	function mainNavigationSetup() {
 		debug = true;
