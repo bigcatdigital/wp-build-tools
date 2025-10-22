@@ -81,7 +81,7 @@ $shades: ('white': (#{$white}, #{$white-invert}), 'shade-f0': (#{$shade-f0}, #{$
 $colours: ('red': (#{$red}, #{$red-invert}), 'orange': (#{$orange}, #{$orange-invert}), 'yellow': (#{$yellow}, #{$yellow-invert}), 'green': (#{$green}, #{$green-invert}), 'blue': (#{$blue}, #{$blue-invert}), 'puple': (#{$purple}, #{$purple-invert}), 'violet': (#{$violet}, #{$violet-invert})) 
 
 $brand-primary: 		$black
-$brand-darker: 			#{darken($black, 12%)}
+$brand-darker: 			color.adjust($black, $lightness: -12%)
 $brand-secondary: 	$shade-40
 
 $brand-primary-invert: 		$text-black

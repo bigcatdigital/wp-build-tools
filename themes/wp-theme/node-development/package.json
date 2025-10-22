@@ -12,7 +12,7 @@
   "author": "Michael Mason",
   "license": "ISC",
   "browserslist": [
-		"ie 11"
+    "ie 11"
   ],
   "watch": {
     "sass": {
@@ -62,19 +62,19 @@
     },
     "copy:css": {
       "patterns": [
-        "dev/*"
+        "dev"
       ],
       "extensions": "css"
     }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"set-env-vars": "export projdev=$(pwd) && cd ../../../ && export projroot=$(pwd) && cd $projdev && echo projdev: $projdev && echo projroot: $projroot",
+    "set-env-vars": "export projdev=$(pwd) && cd ../../../ && export projroot=$(pwd) && cd $projdev && echo projdev: $projdev && echo projroot: $projroot",
     "start": "npm run watch:sass & npm run watch:css &  npm run watch:media & npm run watch:svg & npm run watch:js & npm run watch:css",
-    "build": "npm run sass:build && npm run copy:css && npm run babeljs && npm run uglifyjs && npm run concatjs:build && npm run postcss",
+    "build": "npm run sass:build && npm run copy:css && npm run babeljs && npm run uglifyjs && npm run concatjs && npm run postcss",
     "stop": "stop http-server",
-    "sass": "node-sass --sourceMap=true ./dev/sass/ -o ./dev/css/",
-    "sass:build": "node-sass ./dev/sass/ -o ./dev/css/",
+    "sass": "sass ./dev/sass/ ./dev/css/ --silence-deprecation=import",
+    "sass:build": "sass ./dev/sass/ ./dev/css/",
     "watch:sass": "npm-watch sass",
     "watch:html": "npm-watch copy:html",
     "watch:js": "npm-watch js:dev",
@@ -84,13 +84,13 @@
     "watch:svg": "npm-watch svgstore",
     "watch:svgimgs": "npm-watch svgstore:imgs",
     "svgstore": "node ./bc_modules/svgstore.js",
-    "js:dev": "npm run js:lint && npm run concatjs",
-    "js:lint": "./node_modules/.bin/eslint ./dev/scripts/app.js -o ./dev/scripts/temp/app-temp.js",
+    "js:dev": "./node_modules/.bin/eslint ./dev/scripts/app.js && node ./bc_modules/concatente-js.js",
+    "js:build": "npm run babeljs && npm run uglifyjs && node ./bc_modules/concatente-js.js --buildMode=build",
+    "js:lint": "./node_modules/.bin/eslint --ignore-pattern '/dev/scripts/app-temp.js' ./dev/scripts/ ",
     "babeljs": "./node_modules/.bin/babel ./dev/scripts/app.js -o ./dev/scripts/temp/app-temp.js",
     "uglifyjs": "uglifyjs ./dev/scripts/temp/app-temp.js -o ./dev/scripts/temp/app-temp.js --comments=some ",
     "lintcss": "csslint ./dev/css/style.css && copy:css",
-    "concatjs": "node ./bc_modules/concatente-js.js",
-		"concatjs:build": "node ./bc_modules/concatente-js.js -m=build -d",
+    "concatjs": "node ./bc_modules/concatente-js.js --buildMode=build",
     "postcss": "find dev/. -type f -name \"*.css\" | xargs -Ifile ./node_modules/.bin/postcss file -d ../assets/css/",
     "copy:html": "find dev/. -type f -name \"*.html\" | xargs -Ifile rsync -vR file ../ && echo '\n'",
     "copy:css": "find dev/. -type f \"(\" -iname \"*.css\" -o -iname \"*.css.map\" \")\" | xargs -Ifile rsync -vR file ../assets/ && echo file 'copied' '\n'",
@@ -99,34 +99,40 @@
     "copy:githubroot": "rsync -av --exclude={'node-development','*.php'} ../ ../../../",
     "criticalcss": "node ./bc_modules/critical-css.js",
     "server": "node live-server.js",
-    "copy:docs": "cp -r ./dist/. ./docs/"
+    "copy:docs": "rsync -av --exclude={'node-development','*.php'} themes/hanlon-and-co-2022/ ./"
   },
   "dependencies": {
     "flickity": "^2.2.2",
     "gsap": "^3.6.0",
     "install": "^0.13.0",
-    "npm": "^7.5.4"
+    "npm": "^10.9.1",
+    "yargs": "^15.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
-    "autoprefixer": "^9.7.3",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.38.0",
+    "autoprefixer": "^10.4.20",
     "browserslist": "^4.7.3",
     "copyfiles": "^2.1.1",
-    "critical": "^1.3.9",
+    "critical": "^5.0.3",
     "csslint": "^1.0.5",
-    "cssnano": "^4.1.10",
-    "eslint": "^6.6.0",
-    "live-server": "^1.2.1",
-    "node-sass": "^4.12.0",
-    "npm-watch": "^0.6.0",
-    "postcss": "^7.0.23",
-    "postcss-cli": "^6.1.3",
+    "cssnano": "^7.0.6",
+    "eslint": "^9.37.0",
+    "globals": "^16.4.0",
+    "live-server": "^1.1.0",
+    "npm-watch": "^0.11.0",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.0.0",
     "postcss-load-config": "^2.1.0",
     "puppeteer": "^2.0.0",
+    "sass": "^1.93.2",
     "svgstore": "^3.0.0-2",
-    "uglify-js": "^3.7.2",
-    "yargs": "^15.0.2"
+    "uglify-js": "^3.7.2"
+  },
+  "overrides": {
+    "semver": "^7.5.3"
   }
 }

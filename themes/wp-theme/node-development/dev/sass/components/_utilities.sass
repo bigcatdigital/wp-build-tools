@@ -59,8 +59,8 @@
 /* Colours */
 /* Coloring */
 @each $name, $colour in $colours	
-	$colour-invert: nth($colour, 2) 
-	$colour: nth($colour, 1)
+	$colour-invert: list.nth($colour, 2) 
+	$colour: list.nth($colour, 1)
 	.has-#{$name}-background 
 		background-color: $colour
 		color: $colour-invert 	
@@ -71,8 +71,8 @@
 	
 /* Shading */
 @each $name, $shade in $shades	
-	$shade-invert: nth($shade, 2) 
-	$shade: nth($shade, 1)
+	$shade-invert: list.nth($shade, 2) 
+	$shade: list.nth($shade, 1)
 	.has-#{$name}-background 
 		background-color: $shade
 		h1, h2, h3, h4, h5, p, ul, blockquote, a
