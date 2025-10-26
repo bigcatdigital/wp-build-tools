@@ -73,7 +73,7 @@
     "start": "npm run watch:sass & npm run watch:css &  npm run watch:media & npm run watch:svg & npm run watch:js & npm run watch:css",
     "build": "npm run sass:build && npm run copy:css && npm run babeljs && npm run uglifyjs && npm run concatjs && npm run postcss",
     "stop": "stop http-server",
-    "sass": "sass ./dev/sass/ ./dev/css/ --silence-deprecation=import",
+    "sass": "sass dev/sass/:dev/css/",
     "sass:build": "sass ./dev/sass/ ./dev/css/",
     "watch:sass": "npm-watch sass",
     "watch:html": "npm-watch copy:html",

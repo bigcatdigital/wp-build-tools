@@ -13,9 +13,8 @@
 .bc-grid 
 	display: grid
 	grid-template-rows: auto 
-	gap: calc(var(--gutter)* 1.1)
-	grid-template-columns: repeat(auto-fill, minmax(var(--min-col-width), 1fr))
-		
+	gap: calc(var(--gutter) * 1)
+	grid-template-columns: repeat(auto-fill, minmax(var(--min-col-width), 1fr))	
 	&--narrow-cols
 		@extend .bc-grid
 		grid-template-columns: repeat(auto-fill, minmax(var(--min-col-width-narrow), 1fr))
@@ -30,6 +29,9 @@
 		grid-template-columns: repeat(auto-fill, minmax(var(--min-col-width), 1fr))
 	&--x2
 		@media screen and (min-width: $tablet)
+			grid-template-columns: repeat(2, 1fr)
+	&--x2--laptop
+		@media screen and (min-width: $laptop)
 			grid-template-columns: repeat(2, 1fr)
 	&--x4
 		@media screen and (min-width: $tablet)

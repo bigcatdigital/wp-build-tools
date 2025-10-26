@@ -2,6 +2,8 @@
 //**	Global variables *//
 //////////////////////////
 
+@use 'sass:color'
+
 //* Spacing *// 
 $line-height: 1.5
 $vertical-unit: 	1rem * $line-height	
@@ -84,9 +86,9 @@ $brand-primary: 		$black
 $brand-darker: 			color.adjust($black, $lightness: -12%)
 $brand-secondary: 	$shade-40
 
-$brand-primary-invert: 		$text-black
-$brand-darker-invert: 		$white
-$brand-secondary-invert: 	$text-black 
+$brand-primary-invert: 		color.invert($brand-primary, 100%)
+$brand-darker-invert: 		color.invert($brand-darker, 100%)
+$brand-secondary-invert: 	color.invert($brand-secondary, 100%) 
 
 //** Typography  */
 $sans-font: 			'Quattrocento Sans', sans-serif
