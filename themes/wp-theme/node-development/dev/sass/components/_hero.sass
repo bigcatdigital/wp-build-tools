@@ -7,6 +7,7 @@
 		color: inherit
 	&--split
 		@extend .bc-hero
+		
 		.bc-hero
 			&__text, &__media
 				padding-top: var(--gutter)
@@ -14,8 +15,13 @@
 				padding-right: calc(var(--gutter) * 1)
 			&__text
 				@include makeFlexbox($direction: column, $justify: center)
+				
 			&__media
-				padding-bottom: var(--gutter)
+				padding-bottom: calc(var(--gutter) * 0.5) 
+				img 
+					max-height: calc(100vh - var(--gutter) * 2)
+					width: auto
+					max-width: 100%
 			&__footer
 				padding-left:  calc(var(--gutter) * 1)
 				padding-right: calc(var(--gutter) * 1)
@@ -23,7 +29,7 @@
 				color: var(--brand-primary-invert)
 				.svg-icon 
 					fill: var(--brand-primary-invert)
-	&--full-screen
+	&--full-screen, &--full-screen--padded
 		--hero-text-color: #{$white}
 		@extend .bc-hero
 		@include makeFlexbox($direction: column, $justify: center, $align: stretch)
@@ -34,21 +40,33 @@
 		background-position: center
 		background-size: cover
 		color: var(--hero-text-color)
-		& &__media 
-			position: absolute
-			top: 0
-			left: 0
-			width: 100%
-			height: 100%
-			z-index: 0
-			object-fit: cover
-			object-position: center
-			img, video, object, iframe
+		.bc-hero
+			&__media 
 				position: absolute
+				top: 0 
+				left: 0
 				width: 100%
 				height: 100%
+				z-index: 0
 				object-fit: cover
 				object-position: center
+				img, video, object, iframe
+					position: absolute
+					width: 100%
+					height: 100%
+					object-fit: cover
+					object-position: center
+		&--padded
+			padding-top: var(--gutter)
+			padding-left: calc(var(--gutter) * 2)
+			padding-bottom: var(--gutter)
+			padding-right: calc(var(--gutter) * 2)
+			.bc-hero
+				&__media 
+					top: var(--gutter) 
+					left: var(--gutter)
+					width:  calc(100% - var(--gutter) * 2)
+					height: calc(100% - var(--gutter) * 2)
 	.svg-icon
 		fill: var(--hero-text-color)
 	& &__body, & &__header, & &__footer
@@ -60,13 +78,9 @@
 		&__content 
 			@include makeFlexbox($direction: column, $justify: center)
 			z-index: 10
-			@media screen and (min-width: $laptop)
-				grid-column-start: 2 
-				grid-column-end: span 2 
 	& &__header, & &__footer
 		flex: 0 1 10%
 	& &__footer
-		
 		p, a
 			margin: 0
 		&__scroll
