@@ -1,3 +1,4 @@
+@use "_mixins"
 .bc-twin-comoponent 
 	position: relative
 	padding: 0
@@ -25,13 +26,13 @@
 		
 	& &__sects
 		position: relative 
-		@include makeFlexbox(column, $align: stretch)
+		@include mixins.makeFlexbox(column, $align: stretch)
 		background-color: var(--white) 
 		z-index: 20
 	.bc-card
 		position: relative
 		flex: 1 1 50%
-		@include makeFlexbox(column, center)
+		@include mixins.makeFlexbox(column, center)
 		margin-bottom: 0
 		padding: calc(var(--gutter) * 1.333) var(--gutter)
 		color: var(--black)
@@ -53,18 +54,18 @@
 		a 
 			margin-bottom: 0
 		> .bc-media-overlay
-			background-color: $black
+			background-color: var(--black)
 			opacity: 0
 			z-index: 0
 			transition: opacity var(--quicktrans) var(--easing)
-		@include linkHover
+		@include mixins.linkHover
 			text-decoration: none
-			background-color: rgba($black, 0.1)
+			background-color: rgba(var(--black), 0.1)
 			> .bc-media-overlay
 				opacity: 0.6
 		&.is-active
 			text-decoration: none
-			background-color: rgba($black, 0.1)
+			background-color: rgba(var(--black), 0.1)
 			> .bc-media-overlay
 				opacity: 0.6
 		
@@ -72,9 +73,9 @@
 		.bc-twin-comoponent
 			& &__media__is-active
 				opacity: 1
-	@media screen and (min-width: #{$tablet-large}) 
-		@include makeFlexbox($align: stretch)
-		background-color: rgba($black, 0.24)
+	@media screen and (min-width: var(--tablet-large)) 
+		@include mixins.makeFlexbox($align: stretch)
+		background-color: rgba(var(--black), 0.24)
 		& &__media 
 			display: block
 			overflow: hidden

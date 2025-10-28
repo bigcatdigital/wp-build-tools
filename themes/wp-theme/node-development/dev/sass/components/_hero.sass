@@ -1,8 +1,10 @@
 //** Hero component *//
+@use '_mixins'
+
 .bc-hero
 	position: relative
 	overflow: hidden
-	@extend .bc-container
+	@include mixins.makeContainer
 	a 
 		color: inherit
 	&--split
@@ -10,11 +12,11 @@
 		
 		.bc-hero
 			&__text, &__media
-				padding-top: var(--gutter)
+				padding-top: var(--gutter)	
 				padding-left:  calc(var(--gutter) * 1)
 				padding-right: calc(var(--gutter) * 1)
 			&__text
-				@include makeFlexbox($direction: column, $justify: center)
+				@include mixins.makeFlexbox($direction: column, $justify: center)
 				
 			&__media
 				padding-bottom: calc(var(--gutter) * 0.5) 
@@ -30,9 +32,9 @@
 				.svg-icon 
 					fill: var(--brand-primary-invert)
 	&--full-screen, &--full-screen--padded
-		--hero-text-color: #{$white}
+		--hero-text-color: var(--white)
 		@extend .bc-hero
-		@include makeFlexbox($direction: column, $justify: center, $align: stretch)
+		@include mixins.makeFlexbox($direction: column, $justify: center, $align: stretch)
 		height: 100vh
 		padding-top: 0
 		padding-bottom: 0
@@ -72,11 +74,11 @@
 	& &__body, & &__header, & &__footer
 		z-index: 10
 	& &__header, & &__footer
-		@include makeFlexbox($justify: space-between, $align: center)
+		@include mixins.makeFlexbox($justify: space-between, $align: center)
 	& &__body
 		flex: 1 0 80%
 		&__content 
-			@include makeFlexbox($direction: column, $justify: center)
+			@include mixins.makeFlexbox($direction: column, $justify: center)
 			z-index: 10
 	& &__header, & &__footer
 		flex: 0 1 10%
@@ -84,7 +86,7 @@
 		p, a
 			margin: 0
 		&__scroll
-			@include makeFlexbox(column, center, center)
+			@include mixins.makeFlexbox(column, center, center)
 			padding: calc(var(--vertical-unit) / 2) calc(var(--gutter) * 2)
 			
 			text-decoration: none
@@ -92,9 +94,9 @@
 			.svg-icon
 				max-width: 1rem
 				max-height: 1rem 
-			@include linkHover
+			@include mixins.linkHover
 				text-decoration: none
-				background-color: rgba($black, 0.2)
+				background-color: rgba(var(--black), 0.2)
 	& &__heading, & &__tagline, p, & &__link 
 		margin-top: 0
 		margin-bottom: var(--vertical-unit)

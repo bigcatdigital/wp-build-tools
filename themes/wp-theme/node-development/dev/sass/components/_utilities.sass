@@ -1,50 +1,54 @@
 /** Utilities **/
+@use 'sass:list'
+@use '../globals/_variables'
+@use 'mixins'
+
 /* Media */
 .bc-media-overlay 
-	@include mediaOverlay
+	@include mixins.mediaOverlay
 .bc-object-embed
-	@include objectEmbed
+	@include mixins.objectEmbed
 .is-1x1 
-	@include is-1x1
+	@include mixins.is-1x1
 .is-3x2 
-	@include is-3x2 
+	@include mixins.is-3x2 
 .is-4x3 
-	@include is-4x3
+	@include mixins.is-4x3
 .is-5x4 
-	@include is-5x4
+	@include mixins.is-5x4
 .is-4x5 
-	@include is-4x5
+	@include mixins.is-4x5
 .is-16x9 
-	@include is-16x9
+	@include mixins.is-16x9
 
 /* Lists */
 .bc-plain-list
-	@include plainList
+	@include mixins.plainList
 
 /* Featured links */
 .bc-icon-links
-	@include plainList
-	@include makeFlexbox($align: center)
+	@include mixins.plainList
+	@include mixins.makeFlexbox($align: center)
 	.svg-icon
-		max-height: #{$line-height}rem
-		max-width: #{$line-height}rem
+		max-height: calc(var(--line-height) * 1rem)
+		max-width: calc(var(--line-height) * 1rem)
 	a 
-		@include makeFlexbox(row, center, center)
+		@include mixins.makeFlexbox(row, center, center)
 		width: 2rem
 		height: 2rem
 		text-decoration: none
-		@include linkHover
+		@include mixins.linkHover
 			text-decoration: none
 	
 .bc-arrow-link
-	@include arrowLink
+	@include mixins.arrowLink
 	
 /* Text component */
 .bc-text-component
-	@include makeTextComponent
+	@include mixins.makeTextComponent
 
 .bc-intro-paragraph
-	font-size: $text-01
+	font-size: var(--text-01)
 	font-weight: var(--bold-font-weight)
 
 /* Invisible content */
@@ -60,7 +64,7 @@
 
 /* Colours */
 /* Coloring */
-@each $name, $colour in $colours	
+@each $name, $colour in variables.$colours	
 	$colour-invert: list.nth($colour, 2) 
 	$colour: list.nth($colour, 1)
 	.has-#{$name}-background 
@@ -72,7 +76,7 @@
 			fill: $colour-invert  	
 	
 /* Shading */
-@each $name, $shade in $shades	
+@each $name, $shade in variables.$shades	
 	$shade-invert: list.nth($shade, 2) 
 	$shade: list.nth($shade, 1)
 	.has-#{$name}-background 
@@ -81,7 +85,7 @@
 			color: $shade-invert 	
 		a
 			color: $shade-invert 
-			@include linkHover
+			@include mixins.linkHover
 				color: $shade-invert
 		.svg-icon
 			fill: $shade-invert  	

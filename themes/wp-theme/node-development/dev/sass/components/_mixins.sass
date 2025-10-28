@@ -16,7 +16,7 @@
 	align-items: $align
 //end makeFlexbox
 
-@mixin makeLabel($uppercase: false, $color: $text-black)
+@mixin makeLabel($uppercase: false, $color: var(--text-black))
 	font-size: 0.8rem
 	color: $color
 	font-weight: 200
@@ -25,7 +25,7 @@
 //end makeLabel
 @mixin makeContainer()
 	padding: var(--gutter)
-	@media screen and (min-width: ($max-content-width + 100px))
+	@media screen and (min-width: calc(var(--max-content-width) + 100px))
 		padding-left: 	calc((100% - var(--max-content-width)) / 2)
 		padding-right:	calc((100% - var(--max-content-width)) / 2)
 @mixin arContainer
@@ -71,7 +71,7 @@
 		height: 		100%
 //objectEmbed
 
-@mixin mediaOverlay($bg-color: $black, $transparency: 0.24, $blend-mode: soft-light)
+@mixin mediaOverlay($bg-color: var(--black), $transparency: 0.24, $blend-mode: soft-light)
 	position: absolute
 	top: 0
 	left: 0
@@ -99,9 +99,9 @@
 	font-weight: var(--bold-font-weight) 
 	text-decoration: none
 	.svg-icon
-		max-width: #{$line-height}rem
-		max-height: #{$line-height}rem 
-		margin-left: calc(var(--gutter) / 2)
+		max-width: calc(var(--line-height) * 1rem)
+		max-height:  calc(var(--line-height) * 1rem) 
+		margin-left: calc(var(--gutter) * 0.5)
 	@include linkHover
 		text-decoration: underline
 @mixin linkHover() 
@@ -118,8 +118,6 @@
 		margin: 0 
 		padding: 0
 
-	
-		
 @mixin makeTextComponent
 	max-width: var(--text-max-width)
 	margin-left: auto

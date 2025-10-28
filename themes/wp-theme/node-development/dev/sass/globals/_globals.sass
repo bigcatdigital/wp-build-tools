@@ -1,4 +1,4 @@
-@import 'variables' 
+@use '_variables' 
 
 $line-height: 1.45
 $bold-weight: 700
@@ -8,135 +8,132 @@ $bold-weight: 700
 	//////////////////////////////// 
 	// ** CSS global variables ** //
 	////////////////////////////////
-	
+
 	//** Layout *// 
 	--body-margin:		0  
 	--body-padding:		0 			
 	--content-max-width: 88%
 	--text-max-width: 	 42rem 
 	--base-cols: 4	
-	--min-col-width: #{$min-col-width}	
-	--min-col-width-narrow: #{$min-col-width-narrow}	
-	--max-content-width: #{$max-content-width}	
+	--min-col-width: #{variables.$min-col-width} 
+	--min-col-width-narrow: #{variables.$min-col-width-narrow}
+	--max-content-width: #{variables.$max-content-width}
 	
 	//* Spacing *//
-	--line-height: #{$line-height}
-	--vertical-unit: #{$vertical-unit}
-	--gutter: #{$gutter}
+	--line-height: 		#{variables.$line-height}
+	--vertical-unit: 	#{variables.$vertical-unit}
+	--gutter: 				#{variables.$gutter}
 	--heading-line-height: 1.3
-	--feature-padding: #{$gutter} * 3
+	--feature-padding: #{variables.$gutter * 3}
 
-	
-	
-	
 	//* Responsive *//
-	--x-small: #{$x-small}	
-	--small: #{$small}	
-	--tablet: #{$tablet}	
-	--tablet-large: #{$tablet-large}	
-	--laptop: #{$laptop}	
-	--laptop-large: #{$laptop-large}	
-	--desktop: #{$desktop}	
-	--desktop-large: #{$desktop-large}	
-	--big-screen: #{$big-screen}
+	--x-small: #{variables.$x-small}
+	--small: #{variables.$small}	
+	--tablet: #{variables.$tablet}	
+	--tablet-large: #{variables.$tablet-large}	
+	--laptop: #{variables.$laptop}	
+	--laptop-large: #{variables.$laptop-large}	
+	--desktop: #{variables.$desktop}	
+	--desktop-large: #{variables.$desktop-large}	
+	--big-screen: #{variables.$big-screen}
 	
 	//** Colour *//
-	--black: #{$black} 			
-	--text-black: #{$text-black} 	
+	--black: #{variables.$black} 			
+	--text-black: #{variables.$text-black} 	
 
 	//* Colours *//
-	--red: #{$red}		
-	--orange: #{$orange} 		
-	--yellow: #{$yellow} 		
-	--green: #{$green} 		
-	--blue: #{$blue} 		
-	--purple: #{$purple}	
-	--violet:	#{$violet} 
+	--red: #{variables.$red}		
+	--orange: #{variables.$orange} 		
+	--yellow: #{variables.$yellow} 		
+	--green: #{variables.$green} 		
+	--blue: #{variables.$blue} 		
+	--purple: #{variables.$purple}	
+	--violet:	#{variables.$violet} 
 	
 	//* Shades *//						 		
-	--white: #{$white}			
-	--shade-f0: #{$shade-f0}
-	--shade-e0: #{$shade-e0}
-	--shade-d0: #{$shade-d0}
-	--shade-c0: #{$shade-c0}
-	--shade-b0: #{$shade-b0}
-	--shade-a0: #{$shade-a0}
-	--shade-90: #{$shade-90}
-	--shade-80: #{$shade-80}
-	--shade-70: #{$shade-70}
-	--shade-60: #{$shade-60}
-	--shade-50: #{$shade-50}
-	--shade-40: #{$shade-40}
-	--shade-30: #{$shade-30}
-	--shade-20: #{$shade-20}
-	--shade-10: #{$shade-10}
+	--white: #{variables.$white}			
+	--shade-f0: #{variables.$shade-f0}
+	--shade-e0: #{variables.$shade-e0}
+	--shade-d0: #{variables.$shade-d0}
+	--shade-c0: #{variables.$shade-c0}
+	--shade-b0: #{variables.$shade-b0}
+	--shade-a0: #{variables.$shade-a0}
+	--shade-90: #{variables.$shade-90}
+	--shade-80: #{variables.$shade-80}
+	--shade-70: #{variables.$shade-70}
+	--shade-60: #{variables.$shade-60}
+	--shade-50: #{variables.$shade-50}
+	--shade-40: #{variables.$shade-40}
+	--shade-30: #{variables.$shade-30}
+	--shade-20: #{variables.$shade-20}
+	--shade-10: #{variables.$shade-10}
 	
 	/* Brand colours */
-	--brand-primary: #{$brand-primary}
-	--brand-darker: #{$brand-darker}
-	--brand-secondary: #{$brand-secondary}	
-	--brand-primary-invert: 	 #{$brand-primary-invert}
-	--brand-darker-invert: 	 #{$brand-darker-invert}
-	--brand-secondary-invert: #{$brand-secondary-invert}	
+	--brand-primary: blue
+	--brand-darker: #{variables.$brand-darker}
+	--brand-secondary: #{variables.$brand-secondary}	
+	--brand-primary-invert: 	 #{variables.$brand-primary-invert}
+	--brand-darker-invert: 	 #{variables.$brand-darker-invert}
+	--brand-secondary-invert: #{variables.$brand-secondary-invert}	
 
 	//** Typography  */
-	--serif-font: #{$serif-font}
-	--sans-font: #{$sans-font}
-	--base-font: #{$serif-font}
-	--heading-font: #{$sans-font}
+	--serif-font: #{variables.$serif-font}
+	--sans-font: #{variables.$sans-font}
+	--base-font: #{variables.$serif-font} 
+	--heading-font: #{variables.$sans-font}
 	
-	--text-colour: #{$text-black}
-	--heading-colour: #{$text-black}
+	--text-colour: #{variables.$text-black}
+	--heading-colour: #{variables.$text-black}
 
-	--link-color: #{$brand-primary}
-	--link-active-color: #{$brand-darker}
-	--link-active-weight: #{$bold-weight}
+	--link-color: #{variables.$brand-primary}
+	--link-active-color: #{variables.$brand-darker}
+	--link-active-weight: #{variables.$bold-weight}
 	
-	--text-line-height: #{$line-height}
+	--text-line-height: #{variables.$line-height}
 	--heading-line-height: 1.3
-	--font-weight: #{$font-weight}
-	--bold-font-weight: #{$bold-weight} 
+	--font-weight: #{variables.$font-weight}
+	--bold-font-weight: #{variables.$bold-weight} 
 	
-	--text-font-weight: #{$font-weight}
+	--text-font-weight: #{variables.$font-weight}
 	
-	--heading-font-weight: #{$bold-weight}
+	--heading-font-weight: #{variables.$bold-weight}
 	
 	
 	//* Pentatonic scale n = 5; r = 2 *//
-	--text--2: #{$text--2}	
-	--text--1: #{$text--1}		
-	--text-00: #{$text-00}		
-	--text-01: #{$text-01}		
-	--text-02: #{$text-02}		
-	--text-03: #{$text-03}  	
-	--text-04: #{$text-04}		
-	--text-10: #{$text-10}
-	--text-11: #{$text-11}		 
-	--text-12: #{$text-12}		
+	--text--2: #{variables.$text--2}	
+	--text--1: #{variables.$text--1}		
+	--text-00: #{variables.$text-00}		
+	--text-01: #{variables.$text-01}		
+	--text-02: #{variables.$text-02}		
+	--text-03: #{variables.$text-03}  	
+	--text-04: #{variables.$text-04}		
+	--text-10: #{variables.$text-10}
+	--text-11: #{variables.$text-11}		 
+	--text-12: #{variables.$text-12}		
 	
-	--x-small-text:	#{$text--2}
-	--small-text: #{$text--1}
-	--regular-text: #{$text-00}
-	--h5-text: #{$text-01}
-	--h4-text: #{$text-02}
-	--h3-text: #{$text-03}
-	--h2-text: #{$text-04}
-	--h1-text: #{$text-10}
-	--large-text: #{$text-11}
-	--super-large-text: #{$text-12}
+	--x-small-text:	#{variables.$text--2}
+	--small-text: #{variables.$text--1}
+	--regular-text: #{variables.$text-00}
+	--h5-text: #{variables.$text-01}
+	--h4-text: #{variables.$text-02}
+	--h3-text: #{variables.$text-03}
+	--h2-text: #{variables.$text-04}
+	--h1-text: #{variables.$text-10}
+	--large-text: #{variables.$text-11}
+	--super-large-text: #{variables.$text-12}
 	
-	--h5: #{$text-01}
-	--h4: #{$text-02}
-	--h3: #{$text-03}
-	--h2: #{$text-04}
-	--h1: #{$text-10}
+	--h5: #{variables.$text-01}
+	--h4: #{variables.$text-02}
+	--h3: #{variables.$text-03}
+	--h2: #{variables.$text-04}
+	--h1: #{variables.$text-10}
 	
 	//* Animations */
-	--quicktrans: #{$quicktrans}
-	--medtrans: #{$medtrans}
-	--menuSlideTransition: #{$quicktrans}
-	--buttonTransition: #{$medtrans}
-	--easing: #{$easing}
-	--bounce: #{cubic-bezier(0.93,.1,.195,1)}
+	--quicktrans: #{variables.$quicktrans}
+	--medtrans: #{variables.$medtrans}
+	--menuSlideTransition: #{variables.$quicktrans}
+	--buttonTransition: #{variables.$medtrans}
+	--easing: #{variables.$easing}
+	--bounce: cubic-bezier(0.93,.1,.195,1)
 
 

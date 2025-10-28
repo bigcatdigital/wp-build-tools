@@ -1,28 +1,30 @@
+@use '../globals/_variables'
+@use '_mixins'
+
 .bc-site-header
 	position: relative
-	@include makeFlexbox($justify: space-between, $wrap: wrap)
+	@include mixins.makeFlexbox($justify: space-between, $wrap: wrap)
 	color: var(--text-black) 
 	& &__home-link, & &__menu-link 
 		flex: 1 1 auto
-		@include makeFlexbox($align:center)
+		@include mixins.makeFlexbox($align: center)
 	& &__menu-link
 		justify-content: flex-end
 	& &__menu-link
 		&__close
 			display: none
 			fill: var(--shade-60)
-		@media screen and (min-width: #{$tablet-large})
+		@media screen and (min-width: var(--tablet-large))
 			display: none
 	& &__main-navigation
-		--header-height: #{($vertical-unit * 3 + 2rem)} 
-		@include makeFlexbox($direction: column)
-		@include plainList
+		--header-height: calc(var(--vertical-unit) * 3 + 2rem) 
+		@include mixins.makeFlexbox($direction: column)
+		@include mixins.plainList
 		position: absolute
 		flex-direction: column
 		width: 100vw
 		height: 100vh
 		padding-top: var(--header-height)
-		
 		top: 0
 		left: auto
 		right: -100%
@@ -32,9 +34,9 @@
 		&__item
 			width: 100%
 			> a 
-				@include makeFlexbox($align: center, $justify: left)
-				padding: calc(#{$vertical-unit} / 2) var(--gutter)
-		@media screen and (min-width: #{$tablet-large}) 
+				@include mixins.makeFlexbox($align: center, $justify: left)
+				padding: calc(var(--vertical-unit) * 0.5) var(--gutter)
+		@media screen and (min-width: var(--tablet-large)) 
 			flex-direction: row 
 			position: static
 			width: auto
@@ -63,7 +65,7 @@
 		.bc-site-header__main-navigation
 			right: 0
 			opacity: 1
-	@media screen and (min-width: #{$tablet-large}) 
+	@media screen and (min-width: #{variables.$tablet-large}) 
 		align-items: stretch
 		&.bc-container
 			padding-top: calc(var(--vertical-unit) / 2)	
@@ -79,13 +81,13 @@
 		
 .bc-breadcrummbs-nav
 	& &__list
-		@include makeFlexbox($align: center)
-		@include plainList
+		@include mixins.makeFlexbox($align: center)
+		@include mixins.plainList
 		font-size: var(--text--1)
 		a
 			font-weight: var(--bold-font-weight)
 			text-decoration: none
-			@include linkHover
+			@include mixins.linkHover
 				text-decoration: underline
 		li 
 			color: var(--shade-50)

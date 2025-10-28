@@ -2,11 +2,21 @@
 @use 'sass:list'
 @use 'sass:color'
 	
-@import 'globals/_globals'
-@import 'components/_mixins'
-@import 'components/utilities.sass' 
+@use 'globals/_variables'
+@use 'globals/_globals'
+@use 'components/_mixins'
+@use 'components/_utilities.sass' 
 
-@debug 'Hello debug'	
+@use 'components/_header.sass'
+@use 'components/_animations.sass'
+@use 'components/_grid'
+@use 'components/_hero' 
+@use 'components/_cards' 
+@use 'components/_bc-two-column-layout'
+@use 'components/_flickity-sliders' 
+@use 'components/_bc-twin-component'
+@use 'components/_tables'
+
 *
 	box-sizing: border-box
 html
@@ -40,7 +50,7 @@ button
 a 
 	color: var(--link-color)
 	transition: color var(--quicktrans) var(--easing)
-	@include linkHover
+	@include mixins.linkHover
 		font-weight: var(--link-active-weight)
 		color: var(--link-active-color)
 blockquote
@@ -67,53 +77,49 @@ iframe
 	html
 		font-size: 20px
 
-@import 'components/header.sass'
-@import 'components/animations.sass'
-@import 'components/grid'
-@import 'components/hero' 
-@import 'components/cards' 
-@import 'components/bc-two-column-layout'
-@import 'components/flickity-sliders'
-@import 'components/bc-twin-component' 
-@import 'components/tables'
-
 /* Inner page header */
 .bc-site-header
 	& &__main-navigation
 		&__item
 			> a
-				@media screen and (max-width: calc(#{$tablet-large} - 1px))	
+				@media screen and (max-width: calc(var(--tablet-large) - 1px))	
 					color: var(--text-black)
 
 /* Hero components overlay */
-
-	
 .bc-card 
 	& &__media 
 		background-color: var(--shade-60) 
 	&--plain-text 
 		background-color: var(--shade-e0)
-		@include linkHover
+		@include mixins.linkHover
 			background-color: var(--shade-d0)
 			text-decoration: none
 			a 
 				text-decoration: underline
 				font-weight: var(--link-active-weight)
-		
+.bc-hero
+	&--split
+		.bc-hero
+			&__media
+
+				position: relative
+				&__caption
+					z-index: 10
+
 /* Transcript for object embeds */
 .bc-show-hide
 	margin-top: calc(var(--vertical-unit) / 2 * -1)
 	margin-bottom: calc(var(--vertical-unit) / 2)
 	& &__toggle
 		position: relative
-		@include makeFlexbox($align: center)
+		@include mixins.makeFlexbox($align: center)
 		padding-top: calc(var(--vertical-unit) / 2)
 		padding-bottom: calc(var(--vertical-unit) / 2)
 		font-family: var(--heading-font)
 		font-size: var(--text-01)
 		font-weight: var(--bold-font-weight)
 		text-decoration: none
-		@include linkHover
+		@include mixins.linkHover
 			text-decoration: underline
 			cursor: pointer
 		&.bc-is-active 

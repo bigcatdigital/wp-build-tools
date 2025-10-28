@@ -1,5 +1,7 @@
-.bc-flickity
-	
+@use '../globals/_variables'
+@use '_mixins'
+
+.bc-flickity	
 	position: relative
 	& &__slide
 		width: 100%
@@ -11,17 +13,17 @@
 	&.bc-flickity--card-slider
 		.bc-flickity__slide
 			min-width: var(--min-col-width)
-		@media screen and (min-width: $small) 
+		@media screen and (min-width: #{variables.$small}) 
 			.bc-flickity__slide
-				max-width: calc(50% - (($gutter * 1	) / 2))
-		@media screen and (min-width: $tablet-large) 
+				max-width: calc(50% - ((var(--gutter) * 1	) / 2))
+		@media screen and (min-width: #{variables.$small}) 
 			.bc-flickity__slide
-				max-width: calc((100% * 0.333) - (($gutter * 2) / 3)) 
-		@media screen and (min-width: $laptop) 
+				max-width: calc((100% * 0.333) - ((var(--gutter) * 2) / 3)) 
+		@media screen and (min-width: #{variables.$small}) 
 			.bc-flickity__slide
-				max-width: calc((100% * 0.25) - (($gutter * 2) / 3))
+				max-width: calc((100% * 0.25) - ((var(--gutter) * 2) / 3))
 		
-	@media screen and (max-width: calc($tablet-large - 1px))
+	@media screen and (max-width: calc( #{variables.$small} - 1px))
 		padding-bottom: calc(var(--vertical-unit) * 2)
 		.flickity-button, .flickity-page-dots
 			bottom: var(--vertical-unit)

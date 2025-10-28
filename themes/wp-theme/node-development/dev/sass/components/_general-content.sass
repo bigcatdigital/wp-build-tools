@@ -1,9 +1,10 @@
+@use 'mixins'
 /** General content **/
 .bc-general-content-row
 	position: relative
 
 .bc-general-content
-	@include makeCols(8)
+	@include mixins.makeCols(8)
 	& &-wrap
 		h1, h2, h3, h4, h5, ul, p, blockquote, hr
 			max-width: 680px
