@@ -1493,6 +1493,9 @@ iframe {
   position: relative;
 }
 .bc-hero--split .bc-hero__media__caption {
+  font-family: var(--sans-font);
+  font-size: var(--text--1);
+  margin-bottom: calc(var(--vertical-unit) * 0.25);
   z-index: 10;
 }
 
